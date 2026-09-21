@@ -13,7 +13,7 @@ export function App() {
     setTimeout(() => {
       setResult({
         summary: "The patient's clinical presentation is highly concerning for an acute inflammatory process localized to the right iliac fossa, demanding urgent surgical consultation.",
-        confidence: 89, // Overall diagnostic confidence score
+        confidence: 89,
         differentials: [
           { name: 'Acute Appendicitis', probability: '92%', risk: 'Critical', rationale: 'Classic presentation: periumbilical pain migrating to right lower quadrant, anorexia, nausea, localized tenderness, and low-grade fever.' },
           { name: 'Acute Mesenteric Adenitis', probability: '45%', risk: 'Moderate', rationale: 'Common mimic in younger adults; often preceded by an upper respiratory infection. Consider ultrasound to differentiate.' },
@@ -38,7 +38,6 @@ export function App() {
     }, 1500);
   };
 
-  // Helper for Confidence Score Color
   const getConfidenceColor = (score: number) => {
     if (score >= 80) return 'text-emerald-600';
     if (score >= 60) return 'text-sky-600';
@@ -172,7 +171,7 @@ export function App() {
                 </div>
             </div>
 
-            {/* Differential Diagnoses (Colorful Cards) */}
+            {/* Differential Diagnoses */}
             <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
               <div className="flex items-center justify-between gap-4 border-b border-slate-100 pb-5">
                 <h3 className="text-2xl font-bold flex items-center gap-3 text-slate-950">
@@ -206,7 +205,7 @@ export function App() {
 
             {/* Investigations & Treatment Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Investigations (Green Theme) */}
+              {/* Investigations */}
               <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
                 <h3 className="text-2xl font-bold flex items-center gap-3 text-emerald-900">
                   <Microscope className="w-7 h-7 text-emerald-600" />
@@ -227,7 +226,7 @@ export function App() {
                 </div>
               </div>
 
-              {/* Treatment Protocols (Blue Theme) */}
+              {/* Treatment Protocols */}
               <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-sm space-y-6">
                 <h3 className="text-2xl font-bold flex items-center gap-3 text-sky-900">
                   <Pill className="w-7 h-7 text-sky-600" />
@@ -236,4 +235,26 @@ export function App() {
                 <div className="space-y-4">
                   {result.treatment.map((trt: any, idx: number) => (
                     <div key={idx} className="bg-sky-50/50 border border-sky-100 rounded-2xl p-5 flex items-start gap-4">
-                        <div className="mt-1 p-1.5 bg-sky-100 rounded-full text-
+                      <div className="mt-1 p-1.5 bg-sky-100 rounded-full text-sky-700 border border-sky-200">
+                        <AlertCircle className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-sky-950 text-base">{trt.phase}</div>
+                        <p className="text-sm text-sky-800 mt-0.5">{trt.action}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-200 bg-white py-6 text-center text-xs text-slate-500 mt-auto">
+        MediAssist AI &bull; Clinical Decision Support System &bull; Professional Edition
+      </footer>
+    </div>
+  );
+}
